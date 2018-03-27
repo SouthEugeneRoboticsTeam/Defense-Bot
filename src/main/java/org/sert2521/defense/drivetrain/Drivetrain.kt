@@ -15,8 +15,7 @@ import org.sertain.hardware.resetEncoder
 
 object Drivetrain : Subsystem() {
     private val frontLeft = Talon(LEFT_FRONT_MOTOR) + Talon(LEFT_REAR_MOTOR)
-    private val frontRight =
-            Talon(RIGHT_FRONT_MOTOR).inverted() + Talon(RIGHT_REAR_MOTOR).inverted()
+    private val frontRight = Talon(RIGHT_FRONT_MOTOR) + Talon(RIGHT_REAR_MOTOR)
 
     private val drive = DifferentialDrive(frontLeft, frontRight)
 
