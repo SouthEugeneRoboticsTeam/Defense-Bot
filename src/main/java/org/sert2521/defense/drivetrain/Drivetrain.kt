@@ -2,6 +2,7 @@ package org.sert2521.defense.drivetrain
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice
 import edu.wpi.first.wpilibj.drive.DifferentialDrive
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import org.sert2521.defense.util.LEFT_FRONT_MOTOR
 import org.sert2521.defense.util.LEFT_REAR_MOTOR
 import org.sert2521.defense.util.RIGHT_FRONT_MOTOR
@@ -18,6 +19,9 @@ object Drivetrain : Subsystem() {
 
     override val defaultCommand = ArcadeDrive()
 
+    val leftPosition get() = leftDrive.getEncoderPosition()
+    val rightPosition get() = rightDrive.getEncoderPosition()
+
     override fun onCreate() {
         leftDrive.setSelectedSensor(FeedbackDevice.QuadEncoder)
         rightDrive.setSelectedSensor(FeedbackDevice.QuadEncoder)
@@ -26,6 +30,11 @@ object Drivetrain : Subsystem() {
     override fun onStart() {
         leftDrive.setEncoderPosition(0)
         rightDrive.setEncoderPosition(0)
+    }
+
+    override fun execute() {
+        SmartDashboard.putNumber("Drivetrain Left Position", leftPosition.toDouble())
+        SmartDashboard.putNumber("Drivetrain Right Position", rightPosition.toDouble())
     }
 
     fun arcade() {
